@@ -1,6 +1,9 @@
 #First we are gonna get the user to build a matrix easy right?
 #So second we are going to implement the three row operations Replacement, Switching, Scaling
 import math
+import sys
+import os
+import vEnv39
 import numpy as np
 
 def main():
