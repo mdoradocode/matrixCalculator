@@ -8,16 +8,21 @@ import sys
 import os
 import vEnv39
 import numpy as np
+from fractions import Fraction
 
 def main():
-    rowSize, colSize = list(map(int,input("Please enter your matrix size (ex. 3,4 for a 3x4 matrix): ").split(",")))
-    entries = list(map(int, input("Enter your matrix values as a single line, left to right, row 0 to row x: ").split()))
+    rowSize, colSize = list(map(int,input("Please enter your matrix size (ex. 3,4 for a 3x4 matrix): ").split(",")))##Need to put error catcher here
+    entries = list(map(float, input("Enter your matrix values as a single line, left to right, row 0 to row x: ").split()))##Need to put error catcher here
     x = Matrix(rowSize,colSize,entries)
     x.printMainMatrix()
     x.replace(2,0,1)
     x. scale(2,1)
     x.switch(0,1)
     x.printREFMatrix()
+    number = Fraction(3.5)
+    print(number.numerator)
+    print(number.denominator)
+
 
 ##This is the matrix class, it will hold the different form that the calcuator will find
 ##The algorithim for finding ithe forms wil be done in the main
@@ -35,17 +40,17 @@ class Matrix:
         for x in range(0, self.rowSize):
             for y in range(0,self.colSize):
                 if(y == self.colSize-1):
-                    print(self.mainMatrix[x][y], sep='   ', end='\n')
+                    print(Fraction(self.mainMatrix[x][y]), sep='   ', end='\n')
                 else:
-                    print(self.mainMatrix[x][y], sep='   ', end= ' ')
+                    print(Fraction(self.mainMatrix[x][y]), sep='   ', end= ' ')
     
     def printREFMatrix(self):
         for x in range(0, self.rowSize):
             for y in range(0,self.colSize):
                 if(y == self.colSize-1):
-                    print(self.REFMatrix[x][y], sep='   ', end='\n')
+                    print(Fraction(self.REFMatrix[x][y]), sep='   ', end='\n')
                 else:
-                    print(self.REFMatrix[x][y], sep='   ', end= ' ')
+                    print(Fraction(self.REFMatrix[x][y]), sep='   ', end= ' ')
 
     def replace(self, scale, rA, rB):
         self.REFMatrix[rA] = self.REFMatrix[rA]+scale*self.REFMatrix[rB]
@@ -58,7 +63,7 @@ class Matrix:
         self.REFMatrix[rA] =  self.REFMatrix[rB]
         self.REFMatrix[rB] = self.storageMatrix[0]
 
-def matchRow():
+
     
 
 
