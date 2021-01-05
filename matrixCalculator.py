@@ -28,6 +28,7 @@ def main():
 ##The algorithim for finding ithe forms wil be done in the main
 class Matrix:
     def __init__(self,row,col, entries):
+        self.pivotColCount = 1
         self.rowSize = row
         self.colSize = col
         self.colIndex = col-1
@@ -66,10 +67,19 @@ class Matrix:
     def findScale(self, row, col):
         return self.RREFMatrix[row][col]
     
-    def checkZeroRow(self):
-        for x in range(0,self.colIndex):
-            for y in range(0, self.rowIndex):
-                self.RREFMatrix
+    def checkZeroRow(self,row):
+        isZeroRow = True
+        for y in range(0, self.colIndex):
+            if(self.RREFMatrix[row][y] != 0):
+                isZeroRow = False
+        return isZeroRow
+
+
+
+
+
+
+
 
 
 
@@ -77,10 +87,14 @@ class Matrix:
 def  findREF(matrix):
     xIndex = 0
     yIndex = 0
-    solveColumn(matrix, xIndex, yIndex)
+    moveZeroRows(matrix)
 
-def solveColumn(matrix,xIndex,yIndex):
-    matrix.checkZeroRow()
+
+
+def moveZeroRows(matrix):
+    for x in range(0, matrix.rowIndex):
+        print (matrix.checkZeroRow(x))
+        
 
 
 
