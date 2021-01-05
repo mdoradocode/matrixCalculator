@@ -18,11 +18,11 @@ def main():
     x.replace(2,0,1)
     x. scale(2,1)
     x.switch(0,1)
-    x.printREFMatrix()
+    x.printRREFMatrix()
     number = Fraction(3.5)
     print(number.numerator)
     print(number.denominator)
-
+    findREF(x)
 
 ##This is the matrix class, it will hold the different form that the calcuator will find
 ##The algorithim for finding ithe forms wil be done in the main
@@ -33,7 +33,7 @@ class Matrix:
         self.colIndex = col-1
         self.rowIndex = row-1
         self.mainMatrix = np.array(entries).reshape(self.rowSize, self.colSize)
-        self.REFMatrix = np.array(entries).reshape(self.rowSize, self.colSize)
+        self.RREFMatrix = np.array(entries).reshape(self.rowSize, self.colSize)
         self.storageMatrix = np.array(entries).reshape(self.rowSize, self.colSize)
     
     def printMainMatrix(self):
@@ -44,30 +44,44 @@ class Matrix:
                 else:
                     print(Fraction(self.mainMatrix[x][y]), sep='   ', end= ' ')
     
-    def printREFMatrix(self):
+    def printRREFMatrix(self):
         for x in range(0, self.rowSize):
             for y in range(0,self.colSize):
                 if(y == self.colSize-1):
-                    print(Fraction(self.REFMatrix[x][y]), sep='   ', end='\n')
+                    print(Fraction(self.RREFMatrix[x][y]), sep='   ', end='\n')
                 else:
-                    print(Fraction(self.REFMatrix[x][y]), sep='   ', end= ' ')
+                    print(Fraction(self.RREFMatrix[x][y]), sep='   ', end= ' ')
 
     def replace(self, scale, rA, rB):
-        self.REFMatrix[rA] = self.REFMatrix[rA]+scale*self.REFMatrix[rB]
+        self.RREFMatrix[rA] = self.RREFMatrix[rA]+scale*self.RREFMatrix[rB]
 
     def scale(self, scale, row):
-        self.REFMatrix[row] = scale*self.REFMatrix[row]
+        self.RREFMatrix[row] = scale*self.RREFMatrix[row]
 
     def switch(self, rA, rB):
-        self.storageMatrix[0] =  self.REFMatrix[rA]
-        self.REFMatrix[rA] =  self.REFMatrix[rB]
-        self.REFMatrix[rB] = self.storageMatrix[0]
+        self.storageMatrix[0] =  self.RREFMatrix[rA]
+        self.RREFMatrix[rA] =  self.RREFMatrix[rB]
+        self.RREFMatrix[rB] = self.storageMatrix[0]
+    
+    def findScale(self, row, col):
+        return self.RREFMatrix[row][col]
+    
+    def checkZeroRow(self):
+        for x in range(0,self.colIndex):
+            for y in range(0, self.rowIndex):
+                self.RREFMatrix
+
 
 
     
+def  findREF(matrix):
+    xIndex = 0
+    yIndex = 0
+    solveColumn(matrix, xIndex, yIndex)
 
+def solveColumn(matrix,xIndex,yIndex):
+    matrix.checkZeroRow()
 
-##def  findREF(matrix):
 
 
 
