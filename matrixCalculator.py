@@ -15,11 +15,12 @@ def main():
     entries = list(map(float, input("Enter your matrix values as a single line, left to right, row 0 to row x: ").split()))##Need to put error catcher here
     x = Matrix(rowSize,colSize,entries)
     x.printMainMatrix()
-    x.replace(2,0,1)
-    x. scale(2,1)
-    x.switch(0,1)
+    ##x.replace(2,0,1)
+    ##x. scale(2,1)
+    ##x.switch(0,1)
     x.printRREFMatrix()
     number = Fraction(3.5)
+    print(number)
     print(number.numerator)
     print(number.denominator)
     findREF(x)
@@ -69,10 +70,19 @@ class Matrix:
     
     def checkZeroRow(self,row):
         isZeroRow = True
-        for y in range(0, self.colIndex):
+        for y in range(0, self.colIndex): ##This is how we are going to account for zero rows atm, but I want functionality added so that the user may select whether they are solving the right hand side or just reducing a matrix
             if(self.RREFMatrix[row][y] != 0):
                 isZeroRow = False
         return isZeroRow
+    
+    def numberOfZeroRow(self):
+        counter = 0
+        for x in range(0, self.rowSize):
+            if(self.checkZeroRow(x) == True):
+                counter += 1
+        print(counter)
+
+        
 
 
 
@@ -88,12 +98,27 @@ def  findREF(matrix):
     xIndex = 0
     yIndex = 0
     moveZeroRows(matrix)
+    matrix.printRREFMatrix()
 
 
 
 def moveZeroRows(matrix):
-    for x in range(0, matrix.rowIndex):
-        print (matrix.checkZeroRow(x))
+    for x in range(0, matrix.rowSize):
+        print(matrix.checkZeroRow(x))
+        print("here 1")
+        if(matrix.checkZeroRow(x) == True):
+            zeroShuffle = matrix.rowIndex
+            print(matrix.checkZeroRow(zeroShuffle))
+            print("here 2")
+            while (matrix.checkZeroRow(zeroShuffle)  ==  True):
+                zeroShuffle -= 1
+                print(zeroShuffle)
+                print("here 3")
+            matrix.switch(x, zeroShuffle)
+            print("here 4")    
+
+
+
         
 
 
