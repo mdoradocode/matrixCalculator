@@ -70,7 +70,7 @@ class Matrix:
     
     def checkZeroRow(self,row):
         isZeroRow = True
-        for y in range(0, self.colIndex): ##This is how we are going to account for zero rows atm, but I want functionality added so that the user may select whether they are solving the right hand side or just reducing a matrix
+        for y in range(0, self.colSize): ##This is how we are going to account for zero rows atm, but I want functionality added so that the user may select whether they are solving the right hand side or just reducing a matrix
             if(self.RREFMatrix[row][y] != 0):
                 isZeroRow = False
         return isZeroRow
@@ -104,18 +104,23 @@ def  findREF(matrix):
 
 def moveZeroRows(matrix):
     for x in range(0, matrix.rowSize):
+        matrix.printRREFMatrix()
+        print('\n')
+        print(x)
         print(matrix.checkZeroRow(x))
-        print("here 1")
+        ##print("here 1")
         if(matrix.checkZeroRow(x) == True):
             zeroShuffle = matrix.rowIndex
-            print(matrix.checkZeroRow(zeroShuffle))
-            print("here 2")
-            while (matrix.checkZeroRow(zeroShuffle)  ==  True):
+            print(matrix.RREFMatrix[x])
+            print(zeroShuffle)
+            ##print(matrix.checkZeroRow(zeroShuffle))
+            ##print("here 2")
+            while (zeroShuffle >= x and matrix.checkZeroRow(zeroShuffle)  ==  True):
                 zeroShuffle -= 1
-                print(zeroShuffle)
-                print("here 3")
+                ##print(zeroShuffle)
+                ##print("here 3")
             matrix.switch(x, zeroShuffle)
-            print("here 4")    
+            ##print("here 4")    
 
 
 
