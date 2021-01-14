@@ -42,17 +42,17 @@ class Matrix:
         for x in range(0, self.rowSize):
             for y in range(0,self.colSize):
                 if(y == self.colSize-1):
-                    print(Fraction(self.mainMatrix[x][y]), sep='   ', end='\n')
+                    print(Fraction(self.mainMatrix[x][y]).limit_denominator(1000), sep='   ', end='\n')
                 else:
-                    print(Fraction(self.mainMatrix[x][y]), sep='   ', end= ' ')
+                    print(Fraction(self.mainMatrix[x][y]).limit_denominator(1000), sep='   ', end= ' ')
     
     def printRREFMatrix(self):
         for x in range(0, self.rowSize):
             for y in range(0,self.colSize):
                 if(y == self.colSize-1):
-                    print(Fraction(self.RREFMatrix[x][y]), sep='   ', end='\n')
+                    print(Fraction(self.RREFMatrix[x][y]).limit_denominator(1000), sep='   ', end='\n')
                 else:
-                    print(Fraction(self.RREFMatrix[x][y]), sep='   ', end= ' ')
+                    print(Fraction(self.RREFMatrix[x][y]).limit_denominator(1000), sep='   ', end= ' ')
 
     def replace(self, scale, rA, rB):
         self.RREFMatrix[rA] = self.RREFMatrix[rA]+scale*self.RREFMatrix[rB]
@@ -104,23 +104,11 @@ def  findREF(matrix):
 
 def moveZeroRows(matrix):
     for x in range(0, matrix.rowSize):
-        matrix.printRREFMatrix()
-        print('\n')
-        print(x)
-        print(matrix.checkZeroRow(x))
-        ##print("here 1")
         if(matrix.checkZeroRow(x) == True):
             zeroShuffle = matrix.rowIndex
-            print(matrix.RREFMatrix[x])
-            print(zeroShuffle)
-            ##print(matrix.checkZeroRow(zeroShuffle))
-            ##print("here 2")
-            while (zeroShuffle >= x and matrix.checkZeroRow(zeroShuffle)  ==  True):
+            while (zeroShuffle > x and matrix.checkZeroRow(zeroShuffle)  ==  True):
                 zeroShuffle -= 1
-                ##print(zeroShuffle)
-                ##print("here 3")
             matrix.switch(x, zeroShuffle)
-            ##print("here 4")    
 
 
 
