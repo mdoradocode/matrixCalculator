@@ -80,14 +80,7 @@ class Matrix:
         for x in range(0, self.rowSize):
             if(self.checkZeroRow(x) == True):
                 counter += 1
-        print(counter)
-
-        
-
-
-
-
-
+        return counter
 
 
 
@@ -97,10 +90,8 @@ class Matrix:
 def  findREF(matrix):
     xIndex = 0
     yIndex = 0
-    moveZeroRows(matrix)
-    matrix.printRREFMatrix()
-
-
+    while(matrix.numberOfZeroRow() + numberOfLeadingEntry() == matrix.rowIndex and matrix.lowerTriangleZero() == True ): ##Functions to be built
+        moveZeroRows(matrix)
 
 def moveZeroRows(matrix):
     for x in range(0, matrix.rowSize):
