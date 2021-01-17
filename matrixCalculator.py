@@ -75,12 +75,38 @@ class Matrix:
                 isZeroRow = False
         return isZeroRow
     
+    def checkPivotCol(self,col):
+        isPivotCol = False
+        leadingEntryOne = False
+        leadingEntryFlag = False
+        for x in range(0,self.rowSize):
+            if(self.RREFMatrix[x][col] == 1):
+                leadingEntryOne = True
+            if(leadingEntryOne == True):
+                isPivotCol = True
+                for y in range(x+1, self.rowSize):
+                    if(self.RREFMatrix[y][col] != 0):
+                        isPivotCol = False
+                return isPivotCol
+
     def numberOfZeroRow(self):
         counter = 0
         for x in range(0, self.rowSize):
             if(self.checkZeroRow(x) == True):
                 counter += 1
         return counter
+
+    def pivotColCount(self):
+        counter = 0
+        for x in range(0,self.colSize):
+           if(self.checkPivotCol(x) == True):
+               count += 1
+        return counter
+        
+    def lowerTriangleZero(self):
+        zeroRowCount = self.numberOfZeroRow()
+
+
 
 
 
@@ -90,8 +116,9 @@ class Matrix:
 def  findREF(matrix):
     xIndex = 0
     yIndex = 0
-    while(matrix.numberOfZeroRow() + numberOfLeadingEntry() == matrix.rowIndex and matrix.lowerTriangleZero() == True ): ##Functions to be built
-        moveZeroRows(matrix)
+    ##while(matrix.numberOfZeroRow() + numberOfLeadingEntry() == matrix.rowIndex and matrix.lowerTriangleZero() == True ): ##Functions to be built
+    moveZeroRows(matrix)
+    print(matrix.checkPivotCol(0))
 
 def moveZeroRows(matrix):
     for x in range(0, matrix.rowSize):
@@ -100,18 +127,4 @@ def moveZeroRows(matrix):
             while (zeroShuffle > x and matrix.checkZeroRow(zeroShuffle)  ==  True):
                 zeroShuffle -= 1
             matrix.switch(x, zeroShuffle)
-
-
-
-        
-
-
-
-
-
-
-        
-
-
-
 main()
